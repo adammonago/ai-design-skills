@@ -31,3 +31,5 @@ For full step-by-step workflows, use these slash commands:
 - `/design-workflow` — design a complete multi-agent workflow with roles, handoffs, and fallbacks
 - `/map-agents` — map out agent responsibilities, boundaries, and communication patterns
 - `/design-oversight` — create a human oversight plan for an agentic system
+- `/design-new-agent` — design a new agent end-to-end, consulting all six AXD design layers so no lens is skipped
+- `/review-agent` — audit and optimise an existing agent across all six AXD design layers so no weakness goes unexamined
