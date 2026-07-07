@@ -1,5 +1,13 @@
 # AI Design Skills Collection
 
+> **Part of the [Designer Skills suite](https://github.com/Owl-Listener/designer-skills).**
+> Install this collection and four more with one command in Claude Code:
+>
+> `/plugin marketplace add Owl-Listener/designer-skills`
+>
+> This repo still works on its own. The suite just gives everyone one front door.
+
+
 Agentic skills, commands, and plugins for designing AI products — from interaction patterns to alignment, evaluation, agent orchestration, and prompt architecture.
 
 **44 skills** and **20 commands** across **6 plugins**, available for both [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Gemini CLI](https://github.com/google-gemini/gemini-cli). Same skills, same shape, both supported as first-class agents.
