@@ -2,11 +2,14 @@
 """Install the VS Code Copilot layer into your personal VS Code prompts folder.
 
 Copies pre-built files from vscode-copilot/ in this repo to:
-  <VSCODE_USER_PROMPTS_FOLDER>/                   (agent files)
-  <VSCODE_USER_PROMPTS_FOLDER>/ai-design-skills/  (prompt command files)
+  <VSCODE_USER_PROMPTS_FOLDER>/   (agent files and prompt command files)
+
+VS Code only discovers prompt files at the top level of the user prompts
+folder, so both the agent files and the command prompt files are copied
+directly into the root of that folder (no subfolders).
 
 After running, reload VS Code (Developer: Reload Window) and open Copilot chat.
-The 6 domain agents appear in the agent selector; type / to access 18 commands.
+The 6 domain agents appear in the agent selector; type / to access 20 commands.
 
 Usage:
   python scripts/build_vscode_prompts.py
@@ -50,19 +53,17 @@ def install(out_root: Path) -> None:
             agents_copied += 1
             print(f"  agent  {dst.relative_to(out_root)}", file=sys.stderr)
 
-        # Copy generated prompt commands to ai-design-skills/<plugin>/.
+        # Copy generated prompt commands to the prompts-folder root.
+        # VS Code only discovers prompt files at the top level of the user
+        # prompts folder; files in subfolders are not picked up as slash
+        # commands, so command files must live directly in out_root.
         cmd_src = plugin_dir / "commands"
         if cmd_src.is_dir():
-            cmd_dst = out_root / "ai-design-skills" / plugin
-            cmd_dst.mkdir(parents=True, exist_ok=True)
             for prompt_file in sorted(cmd_src.glob("*.prompt.md")):
-                dst = cmd_dst / prompt_file.name
+                dst = out_root / prompt_file.name
                 shutil.copy2(prompt_file, dst)
                 prompts_copied += 1
-                print(
-                    f"  prompt ai-design-skills/{plugin}/{prompt_file.name}",
-                    file=sys.stderr,
-                )
+                print(f"  prompt {prompt_file.name}", file=sys.stderr)
 
     print(
         f"\ndone: {agents_copied} agents, {prompts_copied} prompts "
